@@ -1,0 +1,87 @@
+- name: DRFUser
+  admin:
+    list_display:
+      - id
+      - username
+      - url
+  params:
+    url: https://restframework.herokuapp.com/users/
+    columns:
+      - username
+      - url
+  type: api_drf
+- name: DRFSnippet
+  admin:
+    list_display:
+      - id
+      - owner
+      - title
+      - code
+      - language
+      - style
+    list_filter:
+      - language
+      - owner
+  params:
+    url: https://restframework.herokuapp.com/snippets/
+    columns:
+      - owner
+      - title
+      - code
+      - language
+      - style
+  type: api_drf
+- name: JPHUser
+  admin:
+    list_display:
+      - id
+      - name
+      - username
+      - email
+      - phone
+      - website
+    list_filter:
+      - username
+  params:
+    url: https://jsonplaceholder.typicode.com/users
+    columns:
+      - name
+      - username
+      - email
+      - phone
+      - website
+  type: api_generic
+- name: JPHPost
+  admin:
+    list_display:
+      - id
+      - userId
+      - title
+      - body
+    list_filter:
+      - userId
+  params:
+    url: https://jsonplaceholder.typicode.com/posts
+    columns:
+      - userId
+      - title
+      - body
+  type: api_generic
+- name: JPHComment
+  admin:
+    list_display:
+      - id
+      - postId
+      - name
+      - email
+      - body
+    list_filter:
+      - email
+  params:
+    url: https://jsonplaceholder.typicode.com/comments
+    columns:
+      - postId
+      - name
+      - email
+      - body
+  type: api_generic

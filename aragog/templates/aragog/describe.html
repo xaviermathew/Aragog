@@ -1,0 +1,60 @@
+{% extends "admin/base_site.html" %}
+{% load admin_urls mathfilters %}
+
+{% block title %}Describe: {{ model }}{% endblock %}
+
+{% block content %}
+{% with schema=model.source_config.schema %}
+    <h2>Schema</h2>
+    Total: {{ schema.total }}
+    <table>
+        <thead>
+            <tr>
+                <th>field</th>
+                <th>type</th>
+                <th>fill-rate</th>
+                {# <th>choices</th> #}
+                <th>min</th>
+                <th>max</th>
+                <th>mean</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for field, d in schema.properties.items %}
+        <tr>
+            <td>{{ field }}</td>
+            <td>{{ d.type }}</td>
+            <td>{% if d.num_null %}{{ schema.total|sub:d.num_null|intdiv:schema.total|mul:100.0 }}{% else %}100{% endif %}%</td>
+            {# <td>{% if d.choices %}{{ d.choices.keys|slice:":5"|join:", " }}{% if d.choices|length > 5 %}...{% endif %}{% endif %}</td> #}
+            <td>{{ d.min_value }}</td>
+            <td>{{ d.max_value }}</td>
+            <td>{{ d.mean_value }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Group by</h2>
+    {% for field, d in schema.properties.items %}
+    {% if d.choices|length %}
+    <h3>Grouped by {{ field }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>choice</th>
+                <th>count</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for choice, count in d.choices.items|dictsortreversed:1 %}
+        <tr>
+            <td>{{ choice }}</td>
+            <td>{{ count }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% endfor %}
+{% endwith %}
+{% endblock %}
