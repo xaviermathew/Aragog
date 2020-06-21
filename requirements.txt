@@ -1,5 +1,5 @@
 dask==1.2.2
-Django==1.11.23
+Django==1.11.29
 django-extensions==2.1.6
 django-mathfilters==0.4.0
 genson==1.1.0
