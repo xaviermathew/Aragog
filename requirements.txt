@@ -1,4 +1,4 @@
-dask==1.2.2
+dask==2021.10.0
 Django==1.11.29
 django-extensions==2.1.6
 django-mathfilters==0.4.0
