@@ -3,7 +3,7 @@ Django==1.11.29
 django-extensions==2.1.6
 django-mathfilters==0.4.0
 genson==1.1.0
-numpy==1.16.3
+numpy==1.22.0
 pandas==0.24.2
 PyYAML==5.1.2
 requests==2.22.0
